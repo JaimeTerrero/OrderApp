@@ -10,18 +10,16 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class OrderServices : IHelpersServices<SaveOrderViewModel, OrderViewModel>
+    public class OrderServices : IHelpersServices<OrderViewModel>
     {
         private readonly OrderRepository _orderRepository;
-        private readonly ProductRepository _productRepository;
         private readonly ClientRepository _clientRepository;
         public OrderServices(ApplicationContext dbContext)
         {
             _orderRepository = new(dbContext);
-            _productRepository = new(dbContext);
             _clientRepository = new(dbContext);
         }
-        public async Task<SaveOrderViewModel> Add(SaveOrderViewModel vm)
+        public async Task<OrderViewModel> Add(OrderViewModel vm)
         {
             Order order = new();
             order.DeliveryDate = vm.DeliveryDate;
@@ -30,7 +28,7 @@ namespace Application.Services
 
             order = await _orderRepository.AddAsync(order);
 
-            SaveOrderViewModel svm = new();
+            OrderViewModel svm = new();
             svm.Id = order.Id;
             svm.DeliveryDate = order.DeliveryDate;
             svm.ClientId = order.ClientId;
@@ -60,11 +58,11 @@ namespace Application.Services
             }).ToList();
         }
 
-        public async Task<SaveOrderViewModel> GetByIdViewModel(int id)
+        public async Task<OrderViewModel> GetByIdViewModel(int id)
         {
             var order = await _orderRepository.GetByIdAsync(id);
 
-            SaveOrderViewModel vm = new();
+            OrderViewModel vm = new();
 
             vm.Id = order.Id;
             vm.DeliveryDate = order.DeliveryDate;
@@ -74,7 +72,7 @@ namespace Application.Services
             return vm;
         }
 
-        public async Task Update(SaveOrderViewModel vm)
+        public async Task Update(OrderViewModel vm)
         {
             var order = await _orderRepository.GetByIdAsync(vm.Id);
 

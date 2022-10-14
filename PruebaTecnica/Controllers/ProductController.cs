@@ -21,12 +21,12 @@ namespace PruebaTecnica.Controllers
 
         public IActionResult Create()
         {
-            SaveProductViewModel vm = new();
+            ProductViewModel vm = new();
             return View("SaveProduct", vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SaveProductViewModel vm)
+        public async Task<IActionResult> Create(ProductViewModel vm)
         {
             await _productServices.Add(vm);
             return RedirectToRoute(new { controller = "Product", action = "Index" });
@@ -38,7 +38,7 @@ namespace PruebaTecnica.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SaveProductViewModel vm)
+        public async Task<IActionResult> Edit(ProductViewModel vm)
         {
             await _productServices.Update(vm);
             return RedirectToRoute(new { controller = "Product", action = "Index" });

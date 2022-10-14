@@ -10,21 +10,21 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class ClientServices : IHelpersServices<SaveClientViewModel, ClientViewModel>
+    public class ClientServices : IHelpersServices<ClientViewModel>
     {
         private readonly ClientRepository _clientRepository;
         public ClientServices(ApplicationContext dbContext)
         {
             _clientRepository = new(dbContext);
         }
-        public async Task<SaveClientViewModel> Add(SaveClientViewModel vm)
+        public async Task<ClientViewModel> Add(ClientViewModel vm)
         {
             Client client = new();
             client.ClientName = vm.ClientName;
 
             client = await _clientRepository.AddAsync(client);
 
-            SaveClientViewModel scvm = new();
+            ClientViewModel scvm = new();
             scvm.Id = client.Id;
             scvm.ClientName = client.ClientName;
 
@@ -48,18 +48,18 @@ namespace Application.Services
             }).ToList();
         }
 
-        public async Task<SaveClientViewModel> GetByIdViewModel(int id)
+        public async Task<ClientViewModel> GetByIdViewModel(int id)
         {
             var client = await _clientRepository.GetByIdAsync(id);
 
-            SaveClientViewModel vm = new();
+            ClientViewModel vm = new();
             vm.Id = client.Id;
             vm.ClientName = client.ClientName;
 
             return vm;
         }
 
-        public async Task Update(SaveClientViewModel vm)
+        public async Task Update(ClientViewModel vm)
         {
             var client = await _clientRepository.GetByIdAsync(vm.Id);
 

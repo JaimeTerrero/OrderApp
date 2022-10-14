@@ -10,14 +10,14 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public class ProductServices : IHelpersServices<SaveProductViewModel, ProductViewModel>
+    public class ProductServices : IHelpersServices<ProductViewModel>
     {
         private readonly ProductRepository _productRepository;
         public ProductServices(ApplicationContext dbContext)
         {
             _productRepository = new(dbContext);
         }
-        public async Task<SaveProductViewModel> Add(SaveProductViewModel vm)
+        public async Task<ProductViewModel> Add(ProductViewModel vm)
         {
             Product product = new();
             product.ProductName = vm.ProductName;
@@ -25,7 +25,7 @@ namespace Application.Services
 
             product = await _productRepository.AddAsync(product);
 
-            SaveProductViewModel spvm = new();
+            ProductViewModel spvm = new();
             spvm.Id = product.Id;
             spvm.ProductName = product.ProductName;
             spvm.Price = product.Price;
@@ -51,11 +51,11 @@ namespace Application.Services
             }).ToList();
         }
 
-        public async Task<SaveProductViewModel> GetByIdViewModel(int id)
+        public async Task<ProductViewModel> GetByIdViewModel(int id)
         {
             var product = await _productRepository.GetByIdAsync(id);
 
-            SaveProductViewModel vm = new();
+            ProductViewModel vm = new();
             vm.Id = product.Id;
             vm.ProductName = product.ProductName;
             vm.Price = product.Price;
@@ -63,7 +63,7 @@ namespace Application.Services
             return vm;
         }
 
-        public async Task Update(SaveProductViewModel vm)
+        public async Task Update(ProductViewModel vm)
         {
             var product = await _productRepository.GetByIdAsync(vm.Id);
 

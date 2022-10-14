@@ -6,14 +6,13 @@ using System.Threading.Tasks;
 
 namespace Application.Services
 {
-    public interface IHelpersServices<SaveViewModel, ViewModel>
-        where SaveViewModel : class
+    public interface IHelpersServices<ViewModel>
         where ViewModel : class
     {
-        Task<SaveViewModel> Add(SaveViewModel vm);
-        Task<SaveViewModel> GetByIdViewModel(int id);
+        Task<ViewModel> Add(ViewModel vm);
+        Task<ViewModel> GetByIdViewModel(int id);
         Task<List<ViewModel>> GetAllViewModel();
-        Task Update(SaveViewModel vm);
+        Task Update(ViewModel vm);
         Task Delete(int id);
     }
 }

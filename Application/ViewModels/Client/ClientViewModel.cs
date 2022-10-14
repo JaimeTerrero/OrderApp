@@ -11,6 +11,5 @@ namespace Application.ViewModels.Client
     {
         public int Id { get; set; }
         public string ClientName { get; set; }
-        public string ClientLastName { get; set; }
     }
 }

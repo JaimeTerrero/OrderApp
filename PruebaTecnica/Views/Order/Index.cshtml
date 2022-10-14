@@ -1,7 +1,7 @@
 ﻿@model List<Application.ViewModels.Order.OrderViewModel>
 
 @{
-    int index = 1;
+    Guid guid = Guid.NewGuid();
 }
 
 
@@ -46,7 +46,7 @@
     <table class="table">
         <thead>
             <tr>
-                <th scope="row">#</th>
+                <th scope="row">Número de orden</th>
                 <th scope="row">Nombre del Cliente</th>
                 <th scope="row">Pedido</th>
                 <th scope="row">Monto a pagar</th>
@@ -57,7 +57,7 @@
             @foreach(Application.ViewModels.Order.OrderViewModel item in Model)
             {
                 <tr>
-                    <td scope="row">@index</td>
+                    <td scope="row">@guid</td>
                     <td scope="row">@item.ClientName</td>
                     <td scope="row">@item.ProductName</td>
                     <td scope="row">RD$@item.Price</td>
@@ -65,7 +65,6 @@
                     <td><a asp-controller="Order" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a></td>
                     <td><button type="button" data-id="@item.Id" class="btn btn-danger deleteBtn">Eliminar</button></td>
                 </tr>
-                index++;
             }
         </tbody>
     </table>

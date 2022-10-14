@@ -1,0 +1,32 @@
+﻿@model Application.ViewModels.Client.ClientViewModel;
+
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-sm-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light fw-bold">
+                    <div class="text-center">@(editMode ? $"Editando al cliente {Model.ClientName}" : "Creando cliente")</div>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Client" asp-action="@(editMode ? "Edit" : "Create")">
+
+                        <div class="mb-3">
+                            <label asp-for="ClientName" class="form-label">Nombre del cliente</label>
+                            <input asp-for="ClientName" class="form-control" />
+                            <span asp-validation-for="ClientName" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id" />
+
+                        <input type="submit" value="@(editMode ? "Editar" : "Guardar")" class="btn btn-primary" />
+                        <a asp-controller="Client" asp-action="Index" class="btn btn-warning">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

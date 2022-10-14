@@ -24,14 +24,14 @@ namespace PruebaTecnica.Controllers
 
         public async Task<IActionResult> Create()
         {
-            SaveOrderViewModel vm = new();
+            OrderViewModel vm = new();
             vm.Products = await _productServices.GetAllViewModel();
             vm.Clients = await _clientServices.GetAllViewModel();
             return View("SaveOrder", vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create(SaveOrderViewModel vm)
+        public async Task<IActionResult> Create(OrderViewModel vm)
         {
             await _orderServices.Add(vm);
             return RedirectToRoute(new { controller = "Order", action = "Index" });
@@ -39,14 +39,14 @@ namespace PruebaTecnica.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            SaveOrderViewModel vm = await _orderServices.GetByIdViewModel(id);
+            OrderViewModel vm = await _orderServices.GetByIdViewModel(id);
             vm.Products = await _productServices.GetAllViewModel();
             vm.Clients = await _clientServices.GetAllViewModel();
             return View("SaveOrder", vm);
         }
 
         [HttpPost]
-        public async Task<IActionResult> Edit(SaveOrderViewModel vm)
+        public async Task<IActionResult> Edit(OrderViewModel vm)
         {
             await _orderServices.Update(vm);
             return RedirectToRoute(new { controller = "Order", action = "Index" });
