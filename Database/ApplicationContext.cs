@@ -48,6 +48,7 @@ namespace Database
             
             #region client
             modelBuilder.Entity<Client>().Property(client => client.ClientName).IsRequired().HasMaxLength(120);
+            modelBuilder.Entity<Client>().Property(client => client.ClientDirection).IsRequired().HasMaxLength(170);
             #endregion
 
             #region order

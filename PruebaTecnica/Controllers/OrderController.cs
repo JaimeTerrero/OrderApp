@@ -33,6 +33,7 @@ namespace PruebaTecnica.Controllers
         [HttpPost]
         public async Task<IActionResult> Create(OrderViewModel vm)
         {
+
             await _orderServices.Add(vm);
             return RedirectToRoute(new { controller = "Order", action = "Index" });
         }
@@ -42,7 +43,7 @@ namespace PruebaTecnica.Controllers
             OrderViewModel vm = await _orderServices.GetByIdViewModel(id);
             vm.Products = await _productServices.GetAllViewModel();
             vm.Clients = await _clientServices.GetAllViewModel();
-            return View("SaveOrder", vm);
+            return View(vm);
         }
 
         [HttpPost]

@@ -21,12 +21,14 @@ namespace Application.Services
         {
             Client client = new();
             client.ClientName = vm.ClientName;
+            client.ClientDirection = vm.ClientDirection;
 
             client = await _clientRepository.AddAsync(client);
 
             ClientViewModel scvm = new();
             scvm.Id = client.Id;
             scvm.ClientName = client.ClientName;
+            scvm.ClientDirection = client.ClientDirection;
 
             return scvm;
         }
@@ -44,7 +46,8 @@ namespace Application.Services
             return clientList.Select(client => new ClientViewModel
             {
                 Id = client.Id,
-                ClientName = client.ClientName
+                ClientName = client.ClientName,
+                ClientDirection = client.ClientDirection,
             }).ToList();
         }
 
@@ -55,6 +58,7 @@ namespace Application.Services
             ClientViewModel vm = new();
             vm.Id = client.Id;
             vm.ClientName = client.ClientName;
+            vm.ClientDirection = client.ClientDirection;
 
             return vm;
         }
@@ -65,6 +69,7 @@ namespace Application.Services
 
             client.Id = vm.Id;
             client.ClientName = vm.ClientName;
+            client.ClientDirection = vm.ClientDirection;
 
             await _clientRepository.UpdateAsync(client);
         }

@@ -20,6 +20,12 @@
                             <span asp-validation-for="ClientName" class="text-danger"></span>
                         </div>
 
+                        <div class="mb-3">
+                            <label asp-for="ClientDirection" class="form-label">Dirección del cliente</label>
+                            <input asp-for="ClientDirection" class="form-control" />
+                            <span asp-validation-for="ClientDirection" class="text-danger"></span>
+                        </div>
+
                         <input type="hidden" asp-for="Id" />
 
                         <input type="submit" value="@(editMode ? "Editar" : "Guardar")" class="btn btn-primary" />

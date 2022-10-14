@@ -62,5 +62,10 @@ namespace Application.Repositories
         {
             return _dbContext.Set<Client>().FindAsync(id).Result.ClientName;
         }
+
+        public string GetClientDirection(int id)
+        {
+            return _dbContext.Set<Client>().FindAsync(id).Result.ClientDirection;
+        }
     }
 }

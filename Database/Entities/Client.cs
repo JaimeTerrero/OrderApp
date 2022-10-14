@@ -11,6 +11,8 @@ namespace Database.Entities
         public int Id { get; set; }
         public string ClientName { get; set; }
 
+        public string ClientDirection { get; set; }
+
         public List<Order> Orders { get; set; }
     }
 }

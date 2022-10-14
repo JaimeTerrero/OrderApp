@@ -1,73 +1,40 @@
 ﻿@model List<Application.ViewModels.Order.OrderViewModel>
 
 @{
-    Guid guid = Guid.NewGuid();
+    Random random = new();
+    int num = random.Next();
 }
 
-
-@*<div class="row" style="width:100%;">
-    <div class="col-6">
-        <h2 class="text-primary">Lista de Órdenes</h2>
-    </div>
-    <div class="col-4 text-right">
-        <button type="button" class="btn btn-success form-control" data-toggle="modal" data-target="#myModal">Crear nueva Órden</button>
-    </div>
-</div>
-
-<div class="modal fade" id="myModal" role="dialog">
-
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-        <div class="modal-content">
-            <form method="post" enctype="multipart/form-data">
-                <div class="modal-header">
-                    <h2 class="modal-title text-primary text-center">Ingreso de Órdenes</h2>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-close" data-dismiss="modal">Cerrar</button>
-                    <button type="submit" class="btn btn-success">Guardar Cambios</button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-</div>*@
 
 <div class="container-fluid">
     <div class="row mb-3">
         <div class="col-3 offset-9">
-            <a asp-controller="Order" asp-action="Create" class="btn btn-success">Crear Orden</a>
+            <a onclick="showInPopup('@Url.Action("Create","Order",null,Context.Request.Scheme)','Crear Orden')" class="btn btn-success">Crear Orden</a>
         </div>
     </div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th scope="row">Número de orden</th>
-                <th scope="row">Nombre del Cliente</th>
-                <th scope="row">Pedido</th>
-                <th scope="row">Monto a pagar</th>
-                <th scope="row">Fecha de entrega</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach(Application.ViewModels.Order.OrderViewModel item in Model)
-            {
-                <tr>
-                    <td scope="row">@guid</td>
-                    <td scope="row">@item.ClientName</td>
-                    <td scope="row">@item.ProductName</td>
-                    <td scope="row">RD$@item.Price</td>
-                    <td scope="row">@item.DeliveryDate</td>
-                    <td><a asp-controller="Order" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary">Editar</a></td>
-                    <td><button type="button" data-id="@item.Id" class="btn btn-danger deleteBtn">Eliminar</button></td>
-                </tr>
-            }
-        </tbody>
-    </table>
+    <div class="row">
+        @foreach (Application.ViewModels.Order.OrderViewModel item in Model)
+        {
+            <div class="col-4 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h6>Cliente: @item.ClientName</h6>
+                        <h6>Producto: @item.ProductName</h6>
+                        <h6>Monto a pagar: RD$@item.Price</h6>
+                        <h6>Dirección: @item.ClientDirection</h6>
+                        <h6>Fecha de entrega: @item.DeliveryDate</h6>
+                        <div class="d-flex justify-content-between align-items-center gap-3">
+                            <div>
+                                <a asp-controller="Order" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Editar</a>
+                                <button type="button" data-id="@item.Id" class="btn btn-sm btn-outline-danger deleteBtn">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 </div>
 
 <form id="deleteForm" asp-action="Remove">

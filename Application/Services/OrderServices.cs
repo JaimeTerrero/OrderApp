@@ -55,6 +55,7 @@ namespace Application.Services
                 ProductName = order.Product.ProductName,
                 Price = order.Product.Price,
                 ClientName = _clientRepository.GetClientName(order.ClientId),
+                ClientDirection = _clientRepository.GetClientDirection(order.ClientId)
             }).ToList();
         }
 

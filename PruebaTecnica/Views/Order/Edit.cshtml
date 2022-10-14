@@ -1,19 +1,15 @@
 ﻿@model Application.ViewModels.Order.OrderViewModel;
 
-@{
-    bool editMode = Model.Id == 0 ? false : true;
-    Layout = null;
-}
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-7 offset-sm-3">
+        <div class="col-6 offset-sm-3">
             <div class="card">
                 <div class="card-header bg-dark text-light fw-bold">
-                    <div class="text-center">@(editMode ? "Editando la orden" : "Creando orden")</div>
+                    <div class="text-center">Editando la orden</div>
                 </div>
                 <div class="card-body">
-                    <form asp-controller="Order" asp-action="@(editMode ? "Edit" : "Create")">
+                    <form asp-controller="Order" asp-action="Edit">
                         <div class="mb-3">
                             <label asp-for="ClientId" class="form-label">Seleccione al empleado</label>
                             <select class="form-select" asp-items="@(new SelectList(Model.Clients,"Id","ClientName"))" asp-for="ClientId">
@@ -33,9 +29,9 @@
                             <input asp-for="DeliveryDate" class="form-control" />
                         </div>
 
-                        <input type="hidden" asp-for="Id"/>
+                        <input type="hidden" asp-for="Id" />
 
-                        <input type="submit" value="@(editMode ? "Editar" : "Guardar")" class="btn btn-primary"/>
+                        <input type="submit" value="Editar" class="btn btn-primary" />
                     </form>
                 </div>
             </div>
