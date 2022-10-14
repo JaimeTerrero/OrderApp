@@ -1,0 +1,57 @@
+﻿@model List<Application.ViewModels.Product.ProductViewModel>
+
+<div class="container-fluid">
+    <div class="row mb-3">
+        <div class="col-3 offset-9">
+            <a asp-controller="Product" asp-action="Create" class="btn btn-success">Crear producto</a>
+        </div>
+    </div>
+
+    <div class="row">
+        @foreach (Application.ViewModels.Product.ProductViewModel item in Model)
+        {
+            <div class="col-4 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h4>@item.ProductName</h4>
+                        <div class="d-flex justify-content-between align-items-center gap-3">
+                            <div>
+                                <a asp-controller="Subject" asp-action="Edit" asp-route-id="@item.Id" class="btn btn-sm btn-outline-info">Editar</a>
+                                <button type="button" data-id="@item.Id" class="btn btn-sm btn-outline-danger deleteBtn">Eliminar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+<form id="deleteForm" asp-action="Remove">
+
+    <input type="hidden" id="productId" name="id" />
+
+</form>
+
+@section Scripts{
+    <script>
+        $(function(){
+            $('.deleteBtn').click(function(e){
+                swal({
+                    title: "¿Está seguro?",
+                    text: "¿Está seguro que desea eliminar el registro?",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true
+                }).then((confirm) => {
+                    if(confirm){
+                        var btn = $(this);
+                        var id = btn.data("id");
+                        $("#productId").val(id);
+                        $("#deleteForm").submit();
+                    }
+                })
+            })
+        })
+    </script>
+}

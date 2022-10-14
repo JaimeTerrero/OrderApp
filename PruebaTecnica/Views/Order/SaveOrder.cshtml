@@ -1,0 +1,48 @@
+﻿@model Application.ViewModels.Order.SaveOrderViewModel;
+
+@{
+    bool editMode = Model.Id == 0 ? false : true;
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6 offset-sm-3">
+            <div class="card">
+                <div class="card-header bg-dark text-light fw-bold">
+                    <div class="text-center">@(editMode ? "Editando la orden" : "Creando orden")</div>
+                </div>
+                <div class="card-body">
+                    <form asp-controller="Order" asp-action="@(editMode ? "Edit" : "Create")">
+
+                        <div class="mb-3">
+                            <label asp-for="ClientId" class="form-label">Seleccione al empleado</label>
+                            <select class="form-select" asp-items="@(new SelectList(Model.Clients,"Id","ClientName"))" asp-for="ClientId">
+                                <option value="0" disabled>Seleccione una opción</option>
+                            </select>
+                            <span asp-validation-for="ClientId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="ProductId" class="form-label">Seleccione el producto</label>
+                            <select class="form-select" asp-items="@(new SelectList(Model.Products,"Id","ProductName"))" asp-for="ProductId">
+                                <option value="0" disabled>Seleccione una opción</option>
+                            </select>
+                            <span asp-validation-for="ProductId" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="DeliveryDate" class="form-label">Fecha de entrega</label>
+                            <input asp-for="DeliveryDate" class="form-control" />
+                            <span asp-validation-for="DeliveryDate" class="text-danger"></span>
+                        </div>
+
+                        <input type="hidden" asp-for="Id"/>
+
+                        <input type="submit" value="@(editMode ? "Editar" : "Guardar")" class="btn btn-primary"/>
+                        <a asp-controller="Order" asp-action="Index" class="btn btn-warning">Volver atrás</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
