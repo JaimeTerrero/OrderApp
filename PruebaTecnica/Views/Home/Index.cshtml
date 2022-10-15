@@ -1,0 +1,61 @@
+﻿@using Application.ViewModels.Product
+@model List<Application.ViewModels.Order.OrderViewModel>
+
+
+
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-2">
+            <div class="card shadow-sm mb-3">
+                <div class="card-header bg-dark text-light">
+                    <h4>Filtro</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <form asp-controller="Home" asp-action="Index">
+
+                        <div class="mb-3">
+                            <div class="form-check">
+                                <input class="form-check-input" value="null" type="radio" name="ProductId" id="product-all" />
+                                <label class="form-check-label" for="product-all">Todas</label>
+                            </div>
+                        </div>
+
+                        @foreach (ProductViewModel product in ViewBag.Products)
+                        {
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" value="@product.Id" type="radio" name="ProductId" id="product-@product.Id" />
+                                    <label class="form-check-label" for="product-@product.Id">@product.ProductName</label>
+                                </div>
+                            </div>
+                        }
+
+                        <button type="submit" class="btn btn-primary">Filtrar</button>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+
+    
+        @foreach (Application.ViewModels.Order.OrderViewModel item in Model)
+        {
+            <div class="col-4 mb-3">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h6>Número de orden: @item.Id</h6>
+                        <h6>Cliente: @item.ClientName</h6>
+                        <h6>Producto: @item.ProductName</h6>
+                        <h6>Monto a pagar: RD$@item.Price</h6>
+                        <h6>Dirección: @item.ClientDirection</h6>
+                        <h6>Fecha de entrega: @item.DeliveryDate</h6>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

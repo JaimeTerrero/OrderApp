@@ -15,7 +15,7 @@
                 <div class="card-body">
                     <form asp-controller="Order" asp-action="@(editMode ? "Edit" : "Create")">
                         <div class="mb-3">
-                            <label asp-for="ClientId" class="form-label">Seleccione al empleado</label>
+                            <label asp-for="ClientId" class="form-label">Seleccione al cliente</label>
                             <select class="form-select" asp-items="@(new SelectList(Model.Clients,"Id","ClientName"))" asp-for="ClientId">
                                 <option value="0" disabled>Seleccione una opción</option>
                             </select>

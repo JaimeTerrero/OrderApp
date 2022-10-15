@@ -59,6 +59,29 @@ namespace Application.Services
             }).ToList();
         }
 
+        public async Task<List<OrderViewModel>> GetAllViewModelWithFilters(FilterOrderViewModel filter)
+        {
+            var orderList = await _orderRepository.GetAllWithIncludeAsync(new List<string> { "Product" });
+
+            var listViewModels = orderList.Select(order => new OrderViewModel
+            {
+                Id = order.Id,
+                DeliveryDate = order.DeliveryDate,
+                ProductId = order.ProductId,
+                ProductName = order.Product.ProductName,
+                Price = order.Product.Price,
+                ClientName = _clientRepository.GetClientName(order.ClientId),
+                ClientDirection = _clientRepository.GetClientDirection(order.ClientId)
+            }).ToList();
+
+            if(filter.ProductId != null)
+            {
+                listViewModels = listViewModels.Where(order => order.ProductId == filter.ProductId.Value).ToList();
+            }
+
+            return listViewModels;
+        }
+
         public async Task<OrderViewModel> GetByIdViewModel(int id)
         {
             var order = await _orderRepository.GetByIdAsync(id);
