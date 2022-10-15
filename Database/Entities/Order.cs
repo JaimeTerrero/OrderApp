@@ -12,6 +12,8 @@ namespace Database.Entities
 
         public DateTime DeliveryDate { get; set; }
 
+        public int Amout { get; set; }
+
         public int ClientId { get; set; }
         public Client Client { get; set; }
 

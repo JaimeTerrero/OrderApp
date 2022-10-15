@@ -9,17 +9,19 @@
         <div class="col-2">
             <div class="card shadow-sm mb-3">
                 <div class="card-header bg-dark text-light">
-                    <h4>Filtro</h4>
+                    <h4 class="text-center">Filtro</h4>
                 </div>
 
                 <div class="card-body">
+
+                    <h4 class="card-title">Productos</h4>
 
                     <form asp-controller="Home" asp-action="Index">
 
                         <div class="mb-3">
                             <div class="form-check">
                                 <input class="form-check-input" value="null" type="radio" name="ProductId" id="product-all" />
-                                <label class="form-check-label" for="product-all">Todas</label>
+                                <label class="form-check-label" for="product-all">Todos</label>
                             </div>
                         </div>
 
@@ -50,7 +52,8 @@
                         <h6>Número de orden: @item.Id</h6>
                         <h6>Cliente: @item.ClientName</h6>
                         <h6>Producto: @item.ProductName</h6>
-                        <h6>Monto a pagar: RD$@item.Price</h6>
+                        <h6>Cantidad: @item.Amout</h6>
+                        <h6>Monto a pagar: RD$@(item.Amout * item.Price)</h6>
                         <h6>Dirección: @item.ClientDirection</h6>
                         <h6>Fecha de entrega: @item.DeliveryDate</h6>
                     </div>

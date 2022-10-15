@@ -53,6 +53,7 @@ namespace Database
 
             #region order
             modelBuilder.Entity<Order>().Property(order => order.DeliveryDate).IsRequired();
+            modelBuilder.Entity<Order>().Property(order => order.Amout).IsRequired();
             #endregion
 
             #region product

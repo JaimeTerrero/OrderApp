@@ -25,6 +25,7 @@ namespace Application.Services
             order.DeliveryDate = vm.DeliveryDate;
             order.ClientId = vm.ClientId;
             order.ProductId = vm.ProductId;
+            order.Amout = vm.Amout;
 
             order = await _orderRepository.AddAsync(order);
 
@@ -33,6 +34,7 @@ namespace Application.Services
             svm.DeliveryDate = order.DeliveryDate;
             svm.ClientId = order.ClientId;
             svm.ProductId = order.ProductId;
+            svm.Amout = order.Amout;
 
             return svm;
         }
@@ -54,6 +56,7 @@ namespace Application.Services
                 ProductId = order.ProductId,
                 ProductName = order.Product.ProductName,
                 Price = order.Product.Price,
+                Amout = order.Amout,
                 ClientName = _clientRepository.GetClientName(order.ClientId),
                 ClientDirection = _clientRepository.GetClientDirection(order.ClientId)
             }).ToList();
@@ -70,6 +73,7 @@ namespace Application.Services
                 ProductId = order.ProductId,
                 ProductName = order.Product.ProductName,
                 Price = order.Product.Price,
+                Amout = order.Amout,
                 ClientName = _clientRepository.GetClientName(order.ClientId),
                 ClientDirection = _clientRepository.GetClientDirection(order.ClientId)
             }).ToList();
@@ -92,6 +96,7 @@ namespace Application.Services
             vm.DeliveryDate = order.DeliveryDate;
             vm.ProductId = order.ProductId;
             vm.ClientId = order.ClientId;
+            vm.Amout = order.Amout;
 
             return vm;
         }
@@ -104,6 +109,7 @@ namespace Application.Services
             order.DeliveryDate = vm.DeliveryDate;
             order.ProductId = vm.ProductId;
             order.ClientId = vm.ClientId;
+            order.Amout = vm.Amout;
 
             await _orderRepository.UpdateAsync(order);
         }

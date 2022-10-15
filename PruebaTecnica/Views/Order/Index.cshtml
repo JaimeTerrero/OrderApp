@@ -17,7 +17,8 @@
                         <h6>Número de orden: @item.Id</h6>
                         <h6>Cliente: @item.ClientName</h6>
                         <h6>Producto: @item.ProductName</h6>
-                        <h6>Monto a pagar: RD$@item.Price</h6>
+                        <h6>Cantidad: @item.Amout</h6>
+                        <h6>Monto a pagar: RD$@(item.Amout * item.Price)</h6>
                         <h6>Dirección: @item.ClientDirection</h6>
                         <h6>Fecha de entrega: @item.DeliveryDate</h6>
                         <div class="d-flex justify-content-between align-items-center gap-3">
