@@ -43,7 +43,7 @@ namespace PruebaTecnica.Controllers
             OrderViewModel vm = await _orderServices.GetByIdViewModel(id);
             vm.Products = await _productServices.GetAllViewModel();
             vm.Clients = await _clientServices.GetAllViewModel();
-            return View(vm);
+            return View("SaveOrder", vm);
         }
 
         [HttpPost]
